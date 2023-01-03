@@ -72,6 +72,15 @@ function reducer(state, {type, payload}){
             currentOperand: null
           }
         }
+        if (state.currentOperand == null) return state
+        if (state.currentOperand === 1){
+          return {...state, currentOperand: null}
+        }
+
+        return {
+          ...state,
+          currentOperand: state.currentOperand.slice(0, -1)
+        }
 
       case ACTIONS.EVALUATE:
         if (state.operation == null || state.currentOperand == null || state.previousOperand == null){
@@ -111,6 +120,10 @@ function evaluate({currentOperand, previousOperand, operation}){
   return computation.toString();
 }
 
+const INTER_FORMATTER = new Intl.NumberFormat("en-us", {maximumFractionDigits: 0,})
+
+function formatOperand()
+
 function App(){
   const [{currentOperand, previousOperand, operation}, dispatch] = useReducer(reducer, {})
   return (
@@ -120,7 +133,7 @@ function App(){
         <div className="current-operand">{currentOperand}</div>
       </div>
       <button className="span-two" onClick={() => dispatch({type: ACTIONS.CLEAR})}>AC</button>
-      <button>DEL</button>
+      <button onClick={() => dispatch({type: ACTIONS.DELETE_DIGIT})}>DEL</button>
       <OperationButton operation="÷" dispatch={dispatch} /> 
       <DigitButton digit="1" dispatch={dispatch} />
       <DigitButton digit="2" dispatch={dispatch} />
