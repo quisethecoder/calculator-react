@@ -31,12 +31,19 @@ function reducer(state, {type, payload}){
           return state
         }
 
+        if (state.currentOperand == null){
+          return{
+            ...state,
+            operation: payload.operation,
+          }
+        }
+
         if(state.previousOperand == null){
           return{
             ...state,
             operation: payload.operation,
             previousOperand: state.currentOperand,
-            currentOperand: null
+            currentOperand: null,
           }
         }
 
