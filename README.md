@@ -1,4 +1,4 @@
-React Calculator App
+# React Calculator App
 
 Summary: This is a React Calculator that handles input changes, user interactions, and complex calculations. React concepts I learned while building this app are re-renders, state management, and breaking down my code into components.
 
